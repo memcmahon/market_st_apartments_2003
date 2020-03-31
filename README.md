@@ -145,6 +145,9 @@ pry(main)> building.add_unit(unit2)
 
 pry(main)> building.add_unit(unit3)
 
+pry(main)> building.rented_units
+# => []
+
 pry(main)> unit2.add_renter(renter1)
 
 pry(main)> building.rented_units
