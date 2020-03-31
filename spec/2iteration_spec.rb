@@ -5,6 +5,7 @@ require './lib/building'
 
 RSpec.describe 'Iteration 2' do
   before :each do
+    @jessie = Renter.new("Jessie")
     @building = Building.new
     @a1 = Apartment.new({number: "A1", monthly_rent: 1200, bathrooms: 1, bedrooms: 1})
     @b2 = Apartment.new({number: "B2", monthly_rent: 999, bathrooms: 2, bedrooms: 2})
@@ -27,7 +28,16 @@ RSpec.describe 'Iteration 2' do
     expect(@building.units).to eq([@a1, @b2])
   end
 
-  it '4. Building.average_rent' do
+  it '4. Building.renters' do
+    expect(@building).to respond_to(:renters).with(0).argument
+    @building.add_unit(@a1)
+    @building.add_unit(@b2)
+    expect(@building.renters).to eq([])
+    @b2.add_renter(@jessie)
+    expect(@building.renters).to eq(["Jessie"])
+  end
+
+  it '5. Building.average_rent' do
     expect(@building).to respond_to(:average_rent).with(0).argument
     @building.add_unit(@a1)
     @building.add_unit(@b2)
